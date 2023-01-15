@@ -14,7 +14,7 @@ namespace KalculatorLiczbZespolonuch
     {
         public double xR, xI;
 
-        public Complexs Sum(Complexs a, Complexs b)
+        public static Complexs operator +(Complexs a, Complexs b)
         {
             Complexs result = new Complexs();
             result.xR = a.xR + b.xR;
@@ -22,7 +22,7 @@ namespace KalculatorLiczbZespolonuch
             return result;
         }
 
-        public Complexs Minus(Complexs a, Complexs b)
+        public static Complexs operator -(Complexs a, Complexs b)
         {
             Complexs result = new Complexs();
             result.xR = a.xR - b.xR;
@@ -30,7 +30,7 @@ namespace KalculatorLiczbZespolonuch
             return result;
         }
 
-        public Complexs Multipl(Complexs a, Complexs b)
+        public static Complexs operator *(Complexs a, Complexs b)
         {
             Complexs result = new Complexs();
             result.xR = a.xR * b.xR - a.xI * b.xI;
@@ -38,7 +38,7 @@ namespace KalculatorLiczbZespolonuch
             return result;
         }
 
-        public Complexs Divine(Complexs a, Complexs b)
+        public static Complexs operator /(Complexs a, Complexs b)
         {
             Complexs result = new Complexs();
             result.xR = (a.xR * b.xR + a.xI * b.xI) / (b.xR * b.xR + b.xI * b.xI);
@@ -46,25 +46,22 @@ namespace KalculatorLiczbZespolonuch
             return result;
         }
 
+        public static bool operator >(Complexs a, Complexs b) => (a.xR > b.xR && a.xI > b.xI);
+        public static bool operator <(Complexs a, Complexs b) => (a.xR < b.xR && a.xI < b.xI);
+        public static bool operator ==(Complexs a, Complexs b) => (a.xR == b.xR && a.xI == b.xI);
+        public static bool operator !=(Complexs a, Complexs b) => (a.xR != b.xR && a.xI != b.xI || a.xR != b.xR && a.xI == b.xI|| a.xR == b.xR && a.xI != b.xI);
+
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
                 return false;
-        
-            Complexs z =(Complexs)obj;
-            return xR==z.xR && xI==z.xI;
+
+            Complexs z = (Complexs)obj;
+            return xR == z.xR && xI == z.xI;
         }
         public override int GetHashCode()
         {
             return (xR.GetHashCode() + xI.GetHashCode()) / 2;
-        }
-        public void InDouble()
-        {
-            
-        }
-        
-        public void OnDouble()
-        {
 
         }
     }

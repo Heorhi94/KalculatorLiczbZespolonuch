@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32.SafeHandles;
+using System;
 using System.Numerics;
 using System.Windows.Forms;
 
@@ -9,71 +10,16 @@ namespace KalculatorLiczbZespolonuch
         double x1, i1, x2, i2;
         Complexs z1 = new Complexs();
         Complexs z2 = new Complexs();
-       
+        Complexs result = new Complexs();
+
 
         public MainForm()
         {
             InitializeComponent();
-            
-        }
-
-        private void bminus_Click(object sender, EventArgs e)
-        {
-            ComplexData(z1, z2, x1, i1, x2, i2);
-            if(z1.Minus(z1, z2).xI > 0)
-            {
-                textResult.Text = Convert.ToString(z1.Minus(z1, z2).xR) + " + i" + Convert.ToString(z1.Minus(z1, z2).xI);
-            }
-            else
-            {
-                textResult.Text = Convert.ToString(z1.Minus(z1, z2).xR) + " + i(" + Convert.ToString(z1.Minus(z1, z2).xI+")");
-            }
-            
-        }
-
-        private void bmultiply_Click(object sender, EventArgs e)
-        {
-            ComplexData(z1, z2, x1, i1, x2, i2);
-            if(z1.Multipl(z1, z2).xI > 0)
-            {
-                textResult.Text = Convert.ToString(z1.Multipl(z1, z2).xR) + " + i" + Convert.ToString(z1.Multipl(z1, z2).xI);
-            }
-            else
-            {
-                textResult.Text = Convert.ToString(z1.Multipl(z1, z2).xR) + " + i(" + Convert.ToString(z1.Multipl(z1, z2).xI)+")";
-            }
-            
-        }
-
-        private void bdivide_Click(object sender, EventArgs e)
-        {
-            ComplexData(z1, z2, x1, i1, x2, i2);
-            if(z1.Divine(z1, z2).xI > 0)
-            {
-                textResult.Text = Convert.ToString(z1.Divine(z1, z2).xR) + " + i" + Convert.ToString(z1.Divine(z1, z2).xI);
-            }
-            else
-            {
-                textResult.Text = Convert.ToString(z1.Divine(z1, z2).xR) + " + i(" + Convert.ToString(z1.Divine(z1, z2).xI)+")";
-            }
-            
-        }
-
-        private void bplus_Click(object sender, EventArgs e)
-        {
-            ComplexData(z1, z2, x1, i1, x2, i2);
-            if (z1.Sum(z1, z2).xI > 0)
-            {
-                textResult.Text = Convert.ToString(z1.Sum(z1, z2).xR) + " + i" + Convert.ToString(z1.Sum(z1, z2).xI);
-            }
-            else
-            {
-                textResult.Text = Convert.ToString(z1.Sum(z1, z2).xR) + " + i(" + Convert.ToString(z1.Sum(z1, z2).xI + ")");
-            }
 
         }
 
-        private void ComplexData(Complexs z1,Complexs z2, double x1,double i1, double x2, double i2)
+        private void ComplexData(Complexs z1, Complexs z2, double x1, double i1, double x2, double i2)
         {
             x1 = Convert.ToDouble(textVal1Real.Text);
             i1 = Convert.ToDouble(textVal1Imgnr.Text);
@@ -85,125 +31,270 @@ namespace KalculatorLiczbZespolonuch
             z2.xI = i2;
         }
 
-        private void textVal1Real_KeyPress(object sender, KeyPressEventArgs e)
+        private void bminus_Click(object sender, EventArgs e)
         {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8 && number != 44 && number != 13 && number != 45)
+            try
             {
-                e.Handled = true;
+                ComplexData(z1, z2, x1, i1, x2, i2);
+                result = z1 - z2;
+                if (result.xI >= 0)
+                {
+
+                    textResult.Text = $"{result.xR}+{result.xI}i";
+                }
+                else
+                {
+                    textResult.Text = $"{result.xR}{result.xI}i";
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please enter the data");
             }
         }
 
-        private void textVal1Imgnr_KeyPress(object sender, KeyPressEventArgs e)
+        private void bmultiply_Click(object sender, EventArgs e)
         {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8 && number != 44 && number != 13 && number != 45)
+            try
             {
-                e.Handled = true;
+                ComplexData(z1, z2, x1, i1, x2, i2);
+                result = z1 * z2;
+                if (result.xI >= 0)
+                {
+                    textResult.Text = $"{result.xR}+{result.xI}i";
+
+                }
+                else
+                {
+                    textResult.Text = $"{result.xR}{result.xI}i";
+
+                }
             }
+            catch
+            {
+                MessageBox.Show("Please enter the data");
+            }
+
 
         }
 
-        private void textVal2Real_KeyPress(object sender, KeyPressEventArgs e)
+        private void bdivide_Click(object sender, EventArgs e)
         {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8 && number != 44 && number != 13 && number != 45)
+            try
             {
-                e.Handled = true;
+                ComplexData(z1, z2, x1, i1, x2, i2);
+                result = z1 / z2;
+                if (result.xI >= 0)
+                {
+                    textResult.Text = $"{result.xR}+{result.xI}i";
+                }
+                else
+                {
+                    textResult.Text = $"{result.xR}{result.xI}i";
+                }
             }
+            catch
+            {
+                MessageBox.Show("Please enter the data");
+            }
+
 
         }
 
+        private void bplus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ComplexData(z1, z2, x1, i1, x2, i2);
+                result = z1 + z2;
+                if (result.xI >= 0)
+                {
+                    textResult.Text = $"{result.xR}+{result.xI}i";
+                }
+                else
+                {
+                    textResult.Text = $"{result.xR}{result.xI}i";
+                }
 
+            }
+            catch
+            {
+                MessageBox.Show("Please enter the data");
+            }
+        }
         private void blogicequals_Click(object sender, EventArgs e)
         {
-            ComplexData(z1, z2, x1, i1, x2, i2);
-            if(z1.xR==z2.xR && z1.xI == z2.xI)
+            try
             {
-                textResult.Text = "true";
+                ComplexData(z1, z2, x1, i1, x2, i2);
+                if (z1 == z2)
+                {
+                    textResult.Text = "true";
+                }
+                else
+                {
+                    textResult.Text = "false";
+                }
             }
-            else
+            catch
             {
-                textResult.Text = "false";
+                MessageBox.Show("Please enter the data");
             }
-
         }
 
         private void bnotEquals_Click(object sender, EventArgs e)
         {
-            ComplexData(z1, z2, x1, i1, x2, i2);
-            if (z1.xR == z2.xR && z1.xI == z2.xI)
+            try
             {
-                textResult.Text = "false";
+                ComplexData(z1, z2, x1, i1, x2, i2);
+                if (z1 != z2)
+                {
+                    textResult.Text = "true";
+                }
+                else
+                {
+                    textResult.Text = "false";
+                }
             }
-            else
+            catch
             {
-                textResult.Text = "true";
+                MessageBox.Show("Please enter the data");
             }
+
         }
 
         private void bMore_Click(object sender, EventArgs e)
         {
-            ComplexData(z1, z2, x1, i1, x2, i2);
-            if (z1.xR > z2.xR && z1.xI > z2.xI)
+            try
             {
-                textResult.Text = "true";
+                ComplexData(z1, z2, x1, i1, x2, i2);
+
+                if (z1 > z2)
+                {
+                    textResult.Text = "true";
+                }
+                else
+                {
+                    textResult.Text = "false";
+                }
             }
-            else
+            catch
             {
-                textResult.Text = "false";
+                MessageBox.Show("Please enter the data");
             }
+
         }
 
         private void bLess_Click(object sender, EventArgs e)
         {
-            ComplexData(z1, z2, x1, i1, x2, i2);
-            if (z1.xR < z2.xR && z1.xI < z2.xI)
+            try
             {
-                textResult.Text = "true";
+                ComplexData(z1, z2, x1, i1, x2, i2);
+
+                if (z1 < z2)
+                {
+                    textResult.Text = "true";
+                }
+                else
+                {
+                    textResult.Text = "false";
+                }
             }
-            else
+            catch
             {
-                textResult.Text = "false";
+                MessageBox.Show("Please enter the data");
             }
+
         }
 
-        private void textVal2Imgnr_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8 && number != 44 && number != 13 && number!=45)
-            {
-                e.Handled = true;
-            }
-        }
+
 
         private void bGetHashCode_Click(object sender, EventArgs e)
         {
-            int r = z1.GetHashCode();
-            int g = z2.GetHashCode();
-            if (r > g)
+            try
             {
-                textResult.Text = "Z1 > Z2";
+                int r = z1.GetHashCode();
+                int g = z2.GetHashCode();
+                if (r > g)
+                {
+                    textResult.Text = "Z1 > Z2";
+                }
+                else if (g > r)
+                {
+                    textResult.Text = "Z1 < Z2";
+                }
+                else
+                {
+                    textResult.Text = "Z1 = Z2";
+                }
             }
-            else if(g > r)
+            catch
             {
-                textResult.Text = "Z1 < Z2";
+                MessageBox.Show("Please enter the data");
             }
-            else
-            {
-                textResult.Text = "Z1 = Z2";
-            }
+
         }
 
-        private void bExit_Click(object sender, EventArgs e)
+        private void bInDouble_Click(object sender, EventArgs e)
         {
-            Close();
+            try
+            {
+                ComplexData(z1, z2, x1, i1, x2, i2);
+                textResult.Clear();
+                textResult.Text = $"Z1 = {z1.xR}; Z2 = {z2.xR}";
+            }
+            catch
+            {
+                MessageBox.Show("Please enter the data");
+            }
+
+        }
+
+        private void bOnDouble_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ComplexData(z1, z2, x1, i1, x2, i2);
+                textResult.Clear();
+                string result1, result2;
+                if (z1.xI >= 0)
+                {
+                    result1 = $"Z1 = {z1.xR}+{z1.xI}i";
+                }
+                else
+                {
+                    result1 = $"Z1 = {z1.xR}{z1.xI}i";
+                }
+                if (z2.xI >= 0)
+                {
+                    result2 = $"Z1 = {z2.xR}+{z2.xI}i";
+                }
+                else
+                {
+                    result2 = $"Z1 = {z2.xR}{z2.xI}i";
+                }
+
+                textResult.Text = result1 + "; " + result2;
+            }
+            catch
+            {
+                MessageBox.Show("Please enter the data");
+            }
+
         }
 
         private void bEquals_Click(object sender, EventArgs e)
         {
-            ComplexData(z1, z2, x1, i1, x2, i2);
-            textResult.Text = z1.Equals(z2).ToString();
+            try
+            {
+                ComplexData(z1, z2, x1, i1, x2, i2);
+                textResult.Text = z1.Equals(z2).ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Please enter the data");
+            }
+
         }
 
         private void bclear_Click(object sender, EventArgs e)
@@ -213,11 +304,20 @@ namespace KalculatorLiczbZespolonuch
             textVal1Real.Clear();
             textVal1Imgnr.Clear();
             textVal2Real.Clear();
-            textVal2Imgnr.Clear();       
+            textVal2Imgnr.Clear();
         }
 
-     
-
-      
+        private void textVal1Real_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8 && number != 44 && number != 13 && number != 45)
+            {
+                e.Handled = true;
+            }
+        }
+        private void bExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

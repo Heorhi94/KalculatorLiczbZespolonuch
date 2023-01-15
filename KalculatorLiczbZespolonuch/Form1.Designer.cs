@@ -143,6 +143,7 @@
             this.bOnDouble.TabIndex = 9;
             this.bOnDouble.Text = "On double";
             this.bOnDouble.UseVisualStyleBackColor = false;
+            this.bOnDouble.Click += new System.EventHandler(this.bOnDouble_Click);
             // 
             // bInDouble
             // 
@@ -157,6 +158,7 @@
             this.bInDouble.TabIndex = 8;
             this.bInDouble.Text = "In double";
             this.bInDouble.UseVisualStyleBackColor = false;
+            this.bInDouble.Click += new System.EventHandler(this.bInDouble_Click);
             // 
             // bLess
             // 
@@ -337,7 +339,7 @@
             this.textVal2Real.Size = new System.Drawing.Size(134, 22);
             this.textVal2Real.TabIndex = 9;
             this.textVal2Real.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textVal2Real.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textVal2Real_KeyPress);
+            this.textVal2Real.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textVal1Real_KeyPress);
             // 
             // textVal1Imgnr
             // 
@@ -349,7 +351,7 @@
             this.textVal1Imgnr.Size = new System.Drawing.Size(132, 22);
             this.textVal1Imgnr.TabIndex = 10;
             this.textVal1Imgnr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textVal1Imgnr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textVal1Imgnr_KeyPress);
+            this.textVal1Imgnr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textVal1Real_KeyPress);
             // 
             // textVal2Imgnr
             // 
@@ -361,7 +363,7 @@
             this.textVal2Imgnr.Size = new System.Drawing.Size(134, 22);
             this.textVal2Imgnr.TabIndex = 11;
             this.textVal2Imgnr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textVal2Imgnr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textVal2Imgnr_KeyPress);
+            this.textVal2Imgnr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textVal1Real_KeyPress);
             // 
             // label3
             // 
