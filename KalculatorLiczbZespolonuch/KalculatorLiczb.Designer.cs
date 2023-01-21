@@ -141,7 +141,7 @@
             this.bOnDouble.Name = "bOnDouble";
             this.bOnDouble.Size = new System.Drawing.Size(104, 125);
             this.bOnDouble.TabIndex = 9;
-            this.bOnDouble.Text = "On double";
+            this.bOnDouble.Text = "From double";
             this.bOnDouble.UseVisualStyleBackColor = false;
             this.bOnDouble.Click += new System.EventHandler(this.bOnDouble_Click);
             // 

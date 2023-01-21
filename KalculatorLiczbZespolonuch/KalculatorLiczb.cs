@@ -7,6 +7,8 @@ namespace KalculatorLiczbZespolonuch
 {
     public partial class MainForm : Form
     {
+       
+        
         double x1, i1, x2, i2;
         Complexs z1 = new Complexs();
         Complexs z2 = new Complexs();
@@ -25,10 +27,10 @@ namespace KalculatorLiczbZespolonuch
             i1 = Convert.ToDouble(textVal1Imgnr.Text);
             x2 = Convert.ToDouble(textVal2Real.Text);
             i2 = Convert.ToDouble(textVal2Imgnr.Text);
-            z1.xR = x1;
-            z2.xR = x2;
-            z1.xI = i1;
-            z2.xI = i2;
+            z1['r'] = x1;
+            z2['r'] = x2;
+            z1['i'] = i1;
+            z2['i'] = i2;
         }
 
         private void bminus_Click(object sender, EventArgs e)
@@ -37,14 +39,14 @@ namespace KalculatorLiczbZespolonuch
             {
                 ComplexData(z1, z2, x1, i1, x2, i2);
                 result = z1 - z2;
-                if (result.xI >= 0)
+                if (result['i'] >= 0)
                 {
 
-                    textResult.Text = $"{result.xR}+{result.xI}i";
+                    textResult.Text = $"{result['r']}+{result['i']}i";
                 }
                 else
                 {
-                    textResult.Text = $"{result.xR}{result.xI}i";
+                    textResult.Text = $"{result['r']}{result['i']}i";
                 }
             }
             catch
@@ -59,14 +61,14 @@ namespace KalculatorLiczbZespolonuch
             {
                 ComplexData(z1, z2, x1, i1, x2, i2);
                 result = z1 * z2;
-                if (result.xI >= 0)
+                if (result['i'] >= 0)
                 {
-                    textResult.Text = $"{result.xR}+{result.xI}i";
+                    textResult.Text = $"{result['r']}+{result['i']}i";
 
                 }
                 else
                 {
-                    textResult.Text = $"{result.xR}{result.xI}i";
+                    textResult.Text = $"{result['r']}{result['i']}i";
 
                 }
             }
@@ -84,13 +86,13 @@ namespace KalculatorLiczbZespolonuch
             {
                 ComplexData(z1, z2, x1, i1, x2, i2);
                 result = z1 / z2;
-                if (result.xI >= 0)
+                if (result['i'] >= 0)
                 {
-                    textResult.Text = $"{result.xR}+{result.xI}i";
+                    textResult.Text = $"{result['r']}+{result['i']}i";
                 }
                 else
                 {
-                    textResult.Text = $"{result.xR}{result.xI}i";
+                    textResult.Text = $"{result['r']}{result['i']}i";
                 }
             }
             catch
@@ -107,13 +109,13 @@ namespace KalculatorLiczbZespolonuch
             {
                 ComplexData(z1, z2, x1, i1, x2, i2);
                 result = z1 + z2;
-                if (result.xI >= 0)
+                if (result['i'] >= 0)
                 {
-                    textResult.Text = $"{result.xR}+{result.xI}i";
+                    textResult.Text = $"{result['r']}+{result['i']}i";
                 }
                 else
                 {
-                    textResult.Text = $"{result.xR}{result.xI}i";
+                    textResult.Text = $"{result['r']}{result['i']}i";
                 }
 
             }
@@ -241,7 +243,7 @@ namespace KalculatorLiczbZespolonuch
             {
                 ComplexData(z1, z2, x1, i1, x2, i2);
                 textResult.Clear();
-                textResult.Text = $"Z1 = {z1.xR}; Z2 = {z2.xR}";
+                textResult.Text = Complexs.Indouble(z1, z2);
             }
             catch
             {
@@ -256,25 +258,8 @@ namespace KalculatorLiczbZespolonuch
             {
                 ComplexData(z1, z2, x1, i1, x2, i2);
                 textResult.Clear();
-                string result1, result2;
-                if (z1.xI >= 0)
-                {
-                    result1 = $"Z1 = {z1.xR}+{z1.xI}i";
-                }
-                else
-                {
-                    result1 = $"Z1 = {z1.xR}{z1.xI}i";
-                }
-                if (z2.xI >= 0)
-                {
-                    result2 = $"Z1 = {z2.xR}+{z2.xI}i";
-                }
-                else
-                {
-                    result2 = $"Z1 = {z2.xR}{z2.xI}i";
-                }
-
-                textResult.Text = result1 + "; " + result2;
+                textResult.Text = Complexs.FromDouble(z1, z2);
+               
             }
             catch
             {
